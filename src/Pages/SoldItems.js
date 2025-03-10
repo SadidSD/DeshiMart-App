@@ -8,7 +8,7 @@ function SoldItems({soldItems}) {
       <hr className="border-black w-full mt-7" />
       <div className='grid grid-cols-5 gap-0'>
         {soldItems.map((product, index) => (
-          <ProductCard key={index} name={product.name} price={product.sellingPrice} quantity={product.quantity} ID={product.ID} image={product.image} />
+          <ProductCard key={index} name={product.name} price={product.sellingPrice} quantity={product.quantity} ID={product.ID} image={product.image} sellStatus="Sold"/>
      
      ))}  </div>
     </div>

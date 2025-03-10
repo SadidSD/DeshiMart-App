@@ -1,14 +1,15 @@
 import React from 'react'
+import AnalyticsCard from '../Components/AnalyticsCard'
+import Investment from '../Images/analytics.png'
 
-function Analytics({Investment, Return,Profit}) {
+
+
+function Analytics({}) {
   return (
-    <div className='flex flex-col h-screen bg-[#efe5db]'>
-      <h1 className='text-3xl font-bold self-center p-10'>Analytics</h1>
-      <div className='flex flex-col gap-5 pl-10 text-3xl'>
-      <p>Total Invested Amount:{Investment}</p>
-      <p>Total return:{Return}</p>
-      <p>Profit:{Profit}</p>
-      </div>
+    <div className='flex flex-col items-center h-screen justify-center bg-[#efe5db]'>
+    <AnalyticsCard  image={Investment} head="Investment" amount="299"/>
+    <AnalyticsCard  image={Investment} head="Revenue" amount="299"/>
+    <AnalyticsCard  image={Investment} head="Profit" amount="299"/>
     </div>
   )
 }

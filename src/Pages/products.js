@@ -48,7 +48,7 @@ function Products({setSoldItems}) {
                 </div>
               
                 {products.map((product, index) => (
-                  <ProductCard key={index} name={product.name} price={product.sellingPrice} quantity={product.quantity} ID={product.ID} image={product.image} sellShow={()=>sellShow(index)} />
+                  <ProductCard key={index} name={product.name} price={product.sellingPrice} quantity={product.quantity} ID={product.ID} image={product.image} sellShow={()=>sellShow(index)} sellStatus="Sell" />
                 ))}
             </div>
             
