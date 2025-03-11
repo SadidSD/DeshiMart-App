@@ -19,9 +19,14 @@ function NewItem({newProduct, setNewProduct, handleSubmit}) {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      setNewProduct({ ...newProduct, image: reader.result }); // Convert to Base64
+    };
+    
     if (file) {
-      const imageURL = URL.createObjectURL(file); 
-      setNewProduct((prev) => ({ ...prev, image: imageURL }));
+      reader.readAsDataURL(file);
     }
   };
   return (

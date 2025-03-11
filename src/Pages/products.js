@@ -3,13 +3,21 @@ import Plus from '../Images/plus.png'
 import ProductCard from '../Components/productCard';
 import NewItem from '../Components/NewItem';
 import Sell from '../Components/Sell';
+import { useEffect } from "react";
 
-function Products({setSoldItems}) {
+function Products({setSoldItems, soldItems}) {
   const [showAddItem, setShowAddItem] = useState(false);
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({name: '', buyingPrice: '',sellingPrice:'', quantity: '1', ID: '',image: null});
   const [showSell, setShowSell] = useState(false);
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/items")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      .catch(err => console.error(err));
+  }, []);
 
   const ItemShow =()=>{
     setShowAddItem(true);
@@ -19,17 +27,29 @@ function Products({setSoldItems}) {
     setIndex(productIndex);
   }
 
-  const handleSubmit =(e)=>{
-    if(newProduct){
-      setProducts([...products, newProduct]);
+  const handleSubmit = async () => {
+    if (newProduct) {
+      await fetch("http://localhost:5000/api/items", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct),
+      });
+      setProducts([...products, newProduct]); // Update UI
     }
     setShowAddItem(false);
-    setNewProduct({name: '', buyingPrice: '',sellingPrice:'', quantity: '1',ID:'',image: null});
-  }
+    setNewProduct({ name: "", buyingPrice: "", sellingPrice: "", quantity: "1", ID: "", image: null });
+  };
 
-  const handleSell = (productIndex) => {
-    setSoldItems((prev) => [...prev, products[productIndex]]); // Add to sold items
-    setProducts((prev) => prev.filter((_, idx) => idx !== productIndex)); // Remove only the sold item
+  const handleSell = async (productIndex) => {
+    const itemId = products[productIndex]._id;
+  
+    await fetch(`http://localhost:5000/api/items/${itemId}/sell`, { method: "PUT" });
+  
+    // Include image in sold items
+    const soldProduct = { ...products[productIndex] };
+  
+    setSoldItems([...soldItems, soldProduct]); // Preserve image data
+    setProducts(products.filter((_, idx) => idx !== productIndex));
     setShowSell(false);
   };
  

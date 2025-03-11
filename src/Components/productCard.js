@@ -9,9 +9,8 @@ function productCard({image, name, price, quantity, ID, sellShow,sellStatus}) {
         </div>
         
         <h3>{name}</h3>
-        <div className='flex justify-between w-full pl-2 pr-2'>
+        <div className='flex self-start w-full pl-2 pr-2'>
         <p>৳{price}</p>
-        <p>Quantity:{quantity}</p>
         </div>
         <div className='flex justify-between w-full pl-2 pr-2'>
           <p>Id:{ID}</p>

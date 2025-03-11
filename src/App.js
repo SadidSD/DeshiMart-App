@@ -13,8 +13,8 @@ function App() {
 <Router>
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="inventory" element={<Products setSoldItems={setSoldItems}/>} />
-    <Route path="soldItems" element={<SoldItems soldItems={soldItems}/>} />
+    <Route path="inventory" element={<Products setSoldItems={setSoldItems} soldItems={soldItems}/>} />
+    <Route path="soldItems" element={<SoldItems soldItems={soldItems} setSoldItems={setSoldItems}/>} />
     <Route path="tasks" element={<Tasks />} />
     <Route path="analytics" element={<Analytics />} />
 

@@ -1,7 +1,13 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import ProductCard from '../Components/productCard'
 
-function SoldItems({soldItems}) {
+function SoldItems({soldItems, setSoldItems}) {
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/sold-items")
+      .then(res => res.json())
+      .then(data => setSoldItems(data));
+  }, []);
   return (
     <div className='min-h-screen max-h-max bg-[#efe5db] p-6'>
       <h2 className='place-self-center text-5xl font-bold pt-12'>Sold Items</h2>
